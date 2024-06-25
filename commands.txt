@@ -28,5 +28,3 @@ gitlab-ctl reconfigure
 
 # Start GitLab services
 gitlab-ctl start
-
-
