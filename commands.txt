@@ -1,0 +1,17 @@
+apt install -y curl openssh-server ca-certificates tzdata
+apt install -y postfix
+snap install --classic certbot
+ln -s /snap/bin/certbot /usr/bin/certbot
+cd /tmp
+curl -LO https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh
+bash /tmp/script.deb.sh
+ufw status
+ufw allow http
+ufw status
+ufw allow https
+ufw allow OpenSSH
+vim /etc/gitlab
+gitlab-ctl reconfigure
+ll
+gitlab-ctl start
+
