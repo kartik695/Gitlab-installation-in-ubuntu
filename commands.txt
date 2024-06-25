@@ -1,17 +1,32 @@
-apt install -y curl openssh-server ca-certificates tzdata
-apt install -y postfix
+#!/bin/bash
+
+# Install required packages
+apt-get update
+apt-get install -y curl openssh-server ca-certificates tzdata
+apt-get install -y postfix
+
+# Install certbot via Snap
 snap install --classic certbot
 ln -s /snap/bin/certbot /usr/bin/certbot
+
+# Download and run GitLab repository installation script
 cd /tmp
 curl -LO https://packages.gitlab.com/install/repositories/gitlab/gitlab-ce/script.deb.sh
 bash /tmp/script.deb.sh
+
+# Configure firewall (UFW) rules
 ufw status
 ufw allow http
-ufw status
 ufw allow https
 ufw allow OpenSSH
-vim /etc/gitlab
+
+# Edit GitLab configuration file (assuming vim here)
+vim /etc/gitlab/gitlab.rb
+
+# Reconfigure GitLab
 gitlab-ctl reconfigure
-ll
+
+# Start GitLab services
 gitlab-ctl start
+
 
